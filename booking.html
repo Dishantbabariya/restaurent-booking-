@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Restaurant Booking Form</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        max-width: 600px;
+        margin: 20px auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        background-color: #f9f9f9;
+    }
+    label {
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+    input, select {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+    button {
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+    button:hover {
+        background-color: #45a049;
+    }
+</style>
+</head>
+<body>
+<h2>Restaurant Booking Form</h2>
+
+<form id="bookingForm">
+    <label for="bookingType">Choice of Booking:</label>
+    <select id="bookingType" onchange="showOptions()">
+        <option value="fullDay">Full day booking</option>
+        <option value="halfDay">Half day booking</option>
+        <option value="hourly">Hourly booking</option>
+    </select>
+
+    <label for="username">User Name:</label>
+    <input type="text" id="username" required>
+
+    <label for="mobile">Mobile Number:</label>
+    <input type="tel" id="mobile" required>
+
+    <label for="email">Email:</label>
+    <input type="email" id="email" required>
+
+    <label for="noOfPersons">Number of Persons:</label>
+    <input type="number" id="noOfPersons" min="1" required>
+
+    <div id="dateContainer">
+        <label for="date">Date:</label>
+        <input type="date" id="date" required>
+    </div>
+
+    <div id="timeSlotContainer" style="display: none;">
+        <label for="timeSlot">Slot:</label>
+        <select id="timeSlot">
+            <option value="breakfast">Breakfast</option>
+            <option value="lunch">Lunch</option>
+            <option value="dinner">Dinner</option>
+        </select>
+    </div>
+
+    <div id="timeContainer" style="display: none;">
+        <label for="time">Time:</label>
+        <input type="time" id="time" required>
+    </div>
+
+    <button type="submit">Submit Booking</button>
+</form>
+
+<script>
+function showOptions() {
+    var bookingType = document.getElementById("bookingType").value;
+    var dateContainer = document.getElementById("dateContainer");
+    var timeSlotContainer = document.getElementById("timeSlotContainer");
+    var timeContainer = document.getElementById("timeContainer");
+
+    // Reset display of all containers
+    dateContainer.style.display = "none";
+    timeSlotContainer.style.display = "none";
+    timeContainer.style.display = "none";
+
+    // Show the relevant container based on booking type
+    if (bookingType === "fullDay") {
+        dateContainer.style.display = "block";
+    } else if (bookingType === "halfDay") {
+        dateContainer.style.display = "block";
+        timeSlotContainer.style.display = "block";
+    } else if (bookingType === "hourly") {
+        dateContainer.style.display = "block";
+        timeContainer.style.display = "block";
+    }
+}
+
+document.getElementById("bookingForm").addEventListener("submit", function(event) {
+    event.preventDefault(); // Prevent default form submission
+
+    // Fetch all form values
+    var bookingType = document.getElementById("bookingType").value;
+    var username = document.getElementById("username").value;
+    var mobile = document.getElementById("mobile").value;
+    var email = document.getElementById("email").value;
+    var noOfPersons = document.getElementById("noOfPersons").value;
+    var date = document.getElementById("date").value;
+    var timeSlot = document.getElementById("timeSlot") ? document.getElementById("timeSlot").value : "";
+    var time = document.getElementById("time") ? document.getElementById("time").value : "";
+
+    // You can process the form data here (e.g., send it to a server via AJAX)
+
+    // For demonstration, we'll just log the data to console
+    console.log("Booking Type:", bookingType);
+    console.log("Username:", username);
+    console.log("Mobile Number:", mobile);
+    console.log("Email:", email);
+    console.log("Number of Persons:", noOfPersons);
+    console.log("Date:", date);
+    console.log("Time Slot:", timeSlot);
+    console.log("Time:", time);
+
+    // Optionally, you can reset the form after submission
+    this.reset();
+});
+</script>
+
+</body>
+</html>
